@@ -7,7 +7,11 @@ class DashboardController {
     }
 
     $onInit() {
-        autorun(() => this.numberOfFighters = this.FighterService.fighterCount);
+        this.dispose = autorun(() => this.numberOfFighters = this.FighterService.fighterCount);
+    }
+
+    $onDestroy() {
+        this.dispose();
     }
 }
 
