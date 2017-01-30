@@ -1,0 +1,8 @@
+@import "compass";
+@import "compass/css3";
+@import '~normalize.css/normalize';
+@import '~bootstrap/dist/css/bootstrap.css';
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}

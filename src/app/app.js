@@ -1,25 +1,21 @@
 import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import uiBootstrap from 'angular-ui-bootstrap';
+import AppComponent from './app.component';
+import Components from './components/components';
+import './app.scss';
 
-import '../style/app.css';
+const root = angular
+    .module('app', [
+        uiRouter,
+        uiBootstrap,
+        Components
+    ])
+    .component('app', AppComponent)
+    .config(($urlRouterProvider, $locationProvider) => {
+        'ngInject';
+        $locationProvider.html5Mode(true).hashPrefix('!');
+        $urlRouterProvider.otherwise('/');
+    });
 
-let app = () => {
-  return {
-    template: require('./app.html'),
-    controller: 'AppCtrl',
-    controllerAs: 'app'
-  }
-};
-
-class AppCtrl {
-  constructor() {
-    this.url = 'https://github.com/preboot/angular-webpack';
-  }
-}
-
-const MODULE_NAME = 'app';
-
-angular.module(MODULE_NAME, [])
-  .directive('app', app)
-  .controller('AppCtrl', AppCtrl);
-
-export default MODULE_NAME;
+export default root;

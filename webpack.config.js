@@ -79,15 +79,15 @@ module.exports = function makeWebpackConfig () {
   // Initialize module
   config.module = {
     preLoaders: [],
-    loaders: [{
-      // JS LOADER
-      // Reference: https://github.com/babel/babel-loader
-      // Transpile .js files using babel-loader
-      // Compiles ES6 and ES7 into ES5 code
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/
-    }, {
+    loaders: [
+      {
+        // JS LOADER
+        // Reference: https://github.com/babel/babel-loader
+        // Transpile .js files using babel-loader
+        // Compiles ES6 and ES7 into ES5 code
+        test: /\.js$/, exclude: [/node_modules/],
+        loader: 'ng-annotate!babel'
+      },{
       // CSS LOADER
       // Reference: https://github.com/webpack/css-loader
       // Allow loading css through js
@@ -101,7 +101,10 @@ module.exports = function makeWebpackConfig () {
       // Reference: https://github.com/webpack/style-loader
       // Use style-loader in development.
       loader: isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
-    }, {
+    },{
+      test: /\.scss$/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader?includePaths[]=./node_modules/compass-mixins/lib']
+    },{
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
       // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
@@ -116,6 +119,10 @@ module.exports = function makeWebpackConfig () {
       // Allow loading html through js
       test: /\.html$/,
       loader: 'raw'
+    }, {
+      // JSON Loader
+      test: /\.json$/,
+      loader: 'json'
     }]
   };
 
