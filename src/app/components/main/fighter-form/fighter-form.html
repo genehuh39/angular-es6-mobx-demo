@@ -1,0 +1,112 @@
+<div>
+    <div class="modal-header">
+        <button
+                ng-click="$ctrl.close()"
+                type="button"
+                class="close">
+        </button>
+        <h3 class="modal-title">Fighter Form</h3>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="First Name" ng-model="$ctrl.formData.firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Name Name" ng-model="$ctrl.formData.lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight Class</label>
+                <select id="weight" class="form-control" ng-model="$ctrl.formData.weight" ng-options="item as item for item in $ctrl.weightClasses">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" id="description" class="form-control" ng-model="$ctrl.formData.description" placeholder="Profile">
+            </div>
+            <div class="form-group">
+                <label for="groundGame">Ground Game (BJJ)</label>
+                    <span
+                        uib-rating
+                        ng-model="$ctrl.formData.groundGame"
+                        max="10"
+                        read-only="false"
+                        on-hover="hoveringOver(value)"
+                        on-leave="overStar = null"
+                        titles="['one','two','three']"
+                        id="groundGame"
+                        class="form-control">
+                    </span>
+            </div>
+            <div class="form-group">
+                <label for="boxing">Boxing</label>
+                    <span
+                        uib-rating
+                        ng-model="$ctrl.formData.boxing"
+                        max="10"
+                        read-only="false"
+                        on-hover="hoveringOver(value)"
+                        on-leave="overStar = null"
+                        titles="['one','two','three']"
+                        id="boxing"
+                        class="form-control">
+                    </span>
+            </div>
+            <div class="form-group">
+                <label for="rangeStriking">Range Striking (Kickboxing)</label>
+                    <span
+                        uib-rating
+                        ng-model="$ctrl.formData.rangeStriking"
+                        max="10"
+                        read-only="false"
+                        on-hover="hoveringOver(value)"
+                        on-leave="overStar = null"
+                        titles="['one','two','three']"
+                        id="rangeStriking"
+                        class="form-control">
+                    </span>
+            </div>
+            <div class="form-group">
+                <label for="wrestling">Wrestling</label>
+                    <span
+                        uib-rating
+                        ng-model="$ctrl.formData.wrestling"
+                        max="10"
+                        read-only="false"
+                        on-hover="hoveringOver(value)"
+                        on-leave="overStar = null"
+                        titles="['one','two','three']"
+                        id="wrestling"
+                        class="form-control">
+                    </span>
+            </div>
+            <div class="form-group">
+                <label for="clinch">Clinch</label>
+                    <span
+                        uib-rating
+                        ng-model="$ctrl.formData.clinch"
+                        max="10"
+                        read-only="false"
+                        on-hover="hoveringOver(value)"
+                        on-leave="overStar = null"
+                        titles="['one','two','three']"
+                        id="clinch"
+                        class="form-control">
+                    </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button
+                ng-click="$ctrl.confirm()"
+                type="button"
+                class="btn btn-primary btn-sm">
+            save
+        </button>
+        <a ng-click="$ctrl.undo()" class="btn btn-warning btn-sm">cancel</a>
+    </div>
+</div>
