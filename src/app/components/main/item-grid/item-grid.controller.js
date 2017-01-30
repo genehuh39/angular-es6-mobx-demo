@@ -21,14 +21,18 @@ class ItemGridController {
         });
 
         formModal.result.then((res) => {
-            //
+            // Empty callback added to avoid console warnings
         }, (res) => {
-            //
+            // Empty callback added to avoid console warnings
         });
     }
 
     $onInit() {
-        autorun(() => this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data));
+        this.dispose = autorun(() => this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data));
+    }
+
+    $onDestroy() {
+        this.dispose();
     }
 }
 
