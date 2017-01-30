@@ -8,7 +8,6 @@ class FighterService {
         this.$timeout = $timeout;
         this.$q = $q;
         this.weightClasses = ['Heavy', '205', '185', '170', '155', '145', '135', '125', '115'];
-        this.data = [];
 
         // Initialize the MobX observables
         extendObservable(this, {
