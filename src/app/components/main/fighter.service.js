@@ -32,6 +32,7 @@ class FighterService {
              */
             addFighter: action((fighterObj) => {
                 const defer = this.$q.defer();
+                fighterObj.id = this.fighterCount + 1;
                 this.$timeout(() => {
                     this.data = [...this.data, fighterObj];
                     defer.resolve(this.data);
@@ -124,7 +125,7 @@ class FighterService {
     calculateFighterQuotients(fighterData) {
         return fighterData.map((fighter) => {
             const total = fighter.groundGame + fighter.rangeStriking + fighter.boxing + fighter.wrestling
-                + fighter.clinch;
+                + fighter.clinch || 0;
             fighter.fighterQuotient = (total/5).toFixed(2);
             return fighter;
         });
