@@ -18,7 +18,7 @@ const ItemGridComponent = {
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="fighter in $ctrl.data">
+                <tr ng-repeat="fighter in $ctrl.data track by $index">
                     <td class="col-md-1">{{fighter.firstName}}</td>
                     <td class="col-md-1">{{fighter.lastName}}</td>
                     <td class="col-md-2">{{fighter.weight}}</td>
