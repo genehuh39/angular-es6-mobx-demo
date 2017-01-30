@@ -1,4 +1,3 @@
-import { extendObservable, action } from 'mobx';
 import fighterData from './mock.json';
 
 class FighterService {
@@ -9,74 +8,7 @@ class FighterService {
         this.$q = $q;
         this.weightClasses = ['Heavy', '205', '185', '170', '155', '145', '135', '125', '115'];
         this.data = [];
-
-        // Initialize the MobX observables
-        extendObservable(this, {
-            data: [],
-            /**
-             * fighterCount
-             *  Computed function to return the total number of fighters
-             *
-             * @returns {Number}
-             */
-            get fighterCount() {
-                return this.data.length;
-            },
-            /**
-             * addFighter
-             *  Adds a new fighter record and returns the updated record set
-             *   $timeout is used to simulate an async Ajax call
-             *
-             * @param fighterObj {JSON}
-             * @returns {Promise|JSON}
-             */
-            addFighter: action((fighterObj) => {
-                const defer = this.$q.defer();
-                fighterObj.id = this.fighterCount + 1;
-                this.$timeout(() => {
-                    this.data = [...this.data, fighterObj];
-                    defer.resolve(this.data);
-                }, 10);
-                return defer.promise;
-            }),
-            /**
-             * updateFighter
-             *  Updates an existing fighter record and returns the updated record set
-             *   $timeout is used to simulate an async Ajax call
-             *
-             * @param fighterObj {JSON}
-             * @returns {Promise|JSON}
-             */
-            updateFighter: action((fighterObj) => {
-                const defer = this.$q.defer();
-                this.$timeout(() => {
-                    this.data = this.data.map(fighter => {
-                        if (fighter.id === fighterObj.id) {
-                            return fighterObj;
-                        } else {
-                            return fighter;
-                        }
-                    });
-                    defer.resolve(this.data);
-                }, 10);
-                return defer.promise;
-            }),
-            /**
-             * deleteFighter
-             *  Deletes a fighter record by ID
-             *
-             * @param fighterId {Number}
-             * @returns {Promise|JSON}
-             */
-            deleteFighter: action((fighterId) => {
-                const defer = this.$q.defer();
-                this.$timeout(() => {
-                    this.data = this.data.filter(fighter => fighter.id !== fighterId);
-                    defer.resolve(this.data);
-                }, 10);
-                return defer.promise;
-            })
-        });
+        this.fighterCount = this.data.length;
     }
 
     /**
@@ -129,6 +61,74 @@ class FighterService {
             fighter.fighterQuotient = (total/5).toFixed(2);
             return fighter;
         });
+    }
+
+
+    /**
+     * addFighter
+     *  Adds a new fighter record and returns the updated record set
+     *   $timeout is used to simulate an async Ajax call
+     *
+     * @param fighterObj {JSON}
+     * @returns {Promise|JSON}
+     */
+    addFighter(fighterObj) {
+        const defer = this.$q.defer();
+        fighterObj.id = this.getFighterCount() + 1;
+        this.$timeout(() => {
+            this.data = [...this.data, fighterObj];
+            defer.resolve(this.data);
+        }, 10);
+        return defer.promise;
+    }
+
+    /**
+     * updateFighter
+     *  Updates an existing fighter record and returns the updated record set
+     *   $timeout is used to simulate an async Ajax call
+     *
+     * @param fighterObj {JSON}
+     * @returns {Promise|JSON}
+     */
+    updateFighter(fighterObj) {
+        const defer = this.$q.defer();
+        this.$timeout(() => {
+            this.data = this.data.map(fighter => {
+                if (fighter.id === fighterObj.id) {
+                    return fighterObj;
+                } else {
+                    return fighter;
+                }
+            });
+            defer.resolve(this.data);
+        }, 10);
+        return defer.promise;
+    }
+
+    /**
+     * deleteFighter
+     *  Deletes a fighter record by ID
+     *
+     * @param fighterId {Number}
+     * @returns {Promise|JSON}
+     */
+    deleteFighter(fighterId) {
+        const defer = this.$q.defer();
+        this.$timeout(() => {
+            this.data = this.data.filter(fighter => fighter.id !== fighterId);
+            defer.resolve(this.data);
+        }, 10);
+        return defer.promise;
+    }
+
+    /**
+     * fighterCount
+     *  Computed function to return the total number of fighters
+     *
+     * @returns {Number}
+     */
+    getFighterCount() {
+        return this.data.length;
     }
 
 }

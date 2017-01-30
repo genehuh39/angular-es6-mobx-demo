@@ -1,5 +1,3 @@
-import { autorun } from 'mobx';
-
 class DashboardController {
     constructor(FighterService) {
         'ngInject';
@@ -7,7 +5,7 @@ class DashboardController {
     }
 
     $onInit() {
-        autorun(() => this.numberOfFighters = this.FighterService.fighterCount);
+        this.numberOfFighters = this.FighterService.getFighterCount();
     }
 }
 

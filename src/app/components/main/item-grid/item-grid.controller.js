@@ -1,5 +1,3 @@
-import { autorun } from 'mobx';
-
 class ItemGridController {
     constructor($uibModal, FighterService) {
         'ngInject';
@@ -28,7 +26,7 @@ class ItemGridController {
     }
 
     $onInit() {
-        autorun(() => this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data));
+        this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
     }
 }
 
