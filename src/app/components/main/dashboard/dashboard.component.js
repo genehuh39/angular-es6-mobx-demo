@@ -1,10 +1,16 @@
+import controller from './dashboard.controller';
 
 const DashboardComponent = {
-    bindings: {
-    },
+    controller,
     template: `
-        <div class="table col-md-10">
-            Dashboard
+        <div class="col-md-3 dashboard">
+            <h5>DASHBOARD</h5>
+            <table class="table table-bordered">
+                <tr>
+                    <td class="col-md-5">Number of Fighters</td>
+                    <td>{{$ctrl.numberOfFighters}}</td>
+                </tr>
+            </table>
         </div>
      `
 };

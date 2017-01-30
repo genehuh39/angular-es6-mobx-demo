@@ -20,7 +20,6 @@ class FighterService {
              * @returns {Number}
              */
             get fighterCount() {
-                console.log(this.data.length);
                 return this.data.length;
             },
             /**
@@ -28,10 +27,10 @@ class FighterService {
              *  Adds a new fighter record and returns the updated record set
              *   $timeout is used to simulate an async Ajax call
              *
+             * @param fighterObj {JSON}
              * @returns {Promise|JSON}
              */
             addFighter: action((fighterObj) => {
-                console.log(fighterObj)
                 const defer = this.$q.defer();
                 this.$timeout(() => {
                     this.data = [...this.data, fighterObj];
@@ -44,6 +43,7 @@ class FighterService {
              *  Updates an existing fighter record and returns the updated record set
              *   $timeout is used to simulate an async Ajax call
              *
+             * @param fighterObj {JSON}
              * @returns {Promise|JSON}
              */
             updateFighter: action((fighterObj) => {
@@ -56,6 +56,21 @@ class FighterService {
                             return fighter;
                         }
                     });
+                    defer.resolve(this.data);
+                }, 10);
+                return defer.promise;
+            }),
+            /**
+             * deleteFighter
+             *  Deletes a fighter record by ID
+             *
+             * @param fighterId {Number}
+             * @returns {Promise|JSON}
+             */
+            deleteFighter: action((fighterId) => {
+                const defer = this.$q.defer();
+                this.$timeout(() => {
+                    this.data = this.data.filter(fighter => fighter.id !== fighterId);
                     defer.resolve(this.data);
                 }, 10);
                 return defer.promise;
@@ -97,6 +112,22 @@ class FighterService {
      */
     getWeightClasses() {
         return this.weightClasses;
+    }
+
+    /**
+     * calculateFighterQuotients
+     *  Compute the fighter scores for every fighter
+     *
+     * @param fighterData
+     * @returns {JSON}
+     */
+    calculateFighterQuotients(fighterData) {
+        return fighterData.map((fighter) => {
+            const total = fighter.groundGame + fighter.rangeStriking + fighter.boxing + fighter.wrestling
+                + fighter.clinch;
+            fighter.fighterQuotient = (total/5).toFixed(2);
+            return fighter;
+        });
     }
 
 }

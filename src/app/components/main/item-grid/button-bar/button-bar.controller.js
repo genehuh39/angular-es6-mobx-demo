@@ -1,11 +1,11 @@
 class ButtonBarController {
-    constructor($uibModal) {
+    constructor($uibModal, FighterService) {
         'ngInject';
         this.$uibModal = $uibModal;
+        this.FighterService = FighterService;
     }
 
-    openEditForm() {
-        const fighterId = this.fighter;
+    openEditForm(fighterId) {
         const formModal = this.$uibModal.open({
             component: 'fighterForm',
             controllerAs: '$ctrl',
@@ -20,6 +20,21 @@ class ButtonBarController {
 
         formModal.result.then((res) => {
            //
+        }, (res) => {
+            //
+        });
+    }
+
+    deleteFighter(fighterId) {
+        const confirmModal = this.$uibModal.open({
+            component: 'confirmModal',
+            controllerAs: '$ctrl',
+            windowClass: 'confirm-modal',
+            size: 'md'
+        });
+
+        confirmModal.result.then((res) => {
+            this.FighterService.deleteFighter(fighterId);
         }, (res) => {
             //
         });

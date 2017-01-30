@@ -28,7 +28,7 @@ class ItemGridController {
     }
 
     $onInit() {
-        autorun(() => this.data = this.FighterService.data);
+        autorun(() => this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data));
     }
 }
 
