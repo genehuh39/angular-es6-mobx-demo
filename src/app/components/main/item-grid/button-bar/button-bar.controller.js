@@ -19,7 +19,7 @@ class ButtonBarController {
         });
 
         formModal.result.then((res) => {
-           //
+            this.FighterService.updateFighter(res);
         }, (res) => {
             //
         });

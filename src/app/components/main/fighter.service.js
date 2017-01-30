@@ -1,11 +1,12 @@
 import fighterData from './mock.json';
 
 class FighterService {
-    constructor($timeout, $q) {
+    constructor($timeout, $q, $rootScope) {
         'ngInject';
 
         this.$timeout = $timeout;
         this.$q = $q;
+        this.$rootScope = $rootScope;
         this.weightClasses = ['Heavy', '205', '185', '170', '155', '145', '135', '125', '115'];
         this.data = [];
         this.fighterCount = this.data.length;
@@ -75,9 +76,9 @@ class FighterService {
     addFighter(fighterObj) {
         const defer = this.$q.defer();
         fighterObj.id = this.getFighterCount() + 1;
-        console.log(fighterObj.id)
         this.$timeout(() => {
             this.data = [...this.data, fighterObj];
+            this.$rootScope.$broadcast('fighterService:updateFighterData');
             defer.resolve(this.data);
         }, 10);
         return defer.promise;
@@ -101,6 +102,7 @@ class FighterService {
                     return fighter;
                 }
             });
+            this.$rootScope.$broadcast('fighterService:updateFighterData');
             defer.resolve(this.data);
         }, 10);
         return defer.promise;
@@ -117,6 +119,7 @@ class FighterService {
         const defer = this.$q.defer();
         this.$timeout(() => {
             this.data = this.data.filter(fighter => fighter.id !== fighterId);
+            this.$rootScope.$broadcast('fighterService:updateFighterData');
             defer.resolve(this.data);
         }, 10);
         return defer.promise;

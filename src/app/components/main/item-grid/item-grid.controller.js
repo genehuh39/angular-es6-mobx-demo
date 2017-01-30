@@ -1,6 +1,7 @@
 class ItemGridController {
-    constructor($uibModal, FighterService) {
+    constructor($scope, $uibModal, FighterService) {
         'ngInject';
+        this.$scope = $scope;
         this.$uibModal = $uibModal;
         this.FighterService = FighterService;
     }
@@ -29,6 +30,9 @@ class ItemGridController {
 
     $onInit() {
         this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
+        this.$scope.$on('fighterService:updateFighterData', res => {
+            this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
+        });
     }
 }
 
