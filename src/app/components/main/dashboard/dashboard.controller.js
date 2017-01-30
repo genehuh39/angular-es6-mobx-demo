@@ -7,9 +7,13 @@ class DashboardController {
 
     $onInit() {
         this.numberOfFighters = this.FighterService.getFighterCount();
-        this.$scope.$on('fighterService:updateFighterData', (res) => {
+        this.dispose = this.$scope.$on('fighterService:updateFighterData', (res) => {
             this.numberOfFighters = this.FighterService.getFighterCount();
         });
+    }
+
+    $onDestroy() {
+        this.dispose();
     }
 }
 

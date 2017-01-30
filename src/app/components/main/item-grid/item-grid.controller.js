@@ -30,9 +30,13 @@ class ItemGridController {
 
     $onInit() {
         this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
-        this.$scope.$on('fighterService:updateFighterData', res => {
+        this.dispose = this.$scope.$on('fighterService:updateFighterData', res => {
             this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
         });
+    }
+
+    $onDestroy() {
+        this.dispose();
     }
 }
 
