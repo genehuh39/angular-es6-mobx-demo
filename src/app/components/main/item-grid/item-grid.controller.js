@@ -19,7 +19,9 @@ class ItemGridController {
         });
 
         formModal.result.then((res) => {
-            //
+            this.FighterService.addFighter(res).then(() => {
+                this.data = this.data = this.FighterService.calculateFighterQuotients(this.FighterService.data);
+            })
         }, (res) => {
             //
         });

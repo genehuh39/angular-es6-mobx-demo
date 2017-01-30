@@ -30,15 +30,7 @@ class FighterFormController {
      *  Triggered by the click event on the modal 'ok' button
      */
     confirm() {
-        if (this.resolve.fighterId === null) {
-            this.FighterService.addFighter(this.formData).then(() => {
-                this.modalInstance.close('confirm');
-            })
-        } else {
-            this.FighterService.updateFighter(this.formData).then(()=> {
-                this.modalInstance.close('confirm');
-            });
-        }
+        this.modalInstance.close(this.formData);
     }
 }
 

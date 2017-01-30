@@ -75,6 +75,7 @@ class FighterService {
     addFighter(fighterObj) {
         const defer = this.$q.defer();
         fighterObj.id = this.getFighterCount() + 1;
+        console.log(fighterObj.id)
         this.$timeout(() => {
             this.data = [...this.data, fighterObj];
             defer.resolve(this.data);
