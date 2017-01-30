@@ -1,9 +1,6 @@
-import controller from './main.controller';
-
 const MainComponent = {
     bindings: {
     },
-    controller,
     template: `
         <div class="container">
             <h3>UFC Fighters</h3>
