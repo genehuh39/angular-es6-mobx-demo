@@ -40,6 +40,7 @@
     "istanbul-instrumenter-loader": "^1.0.0",
     "jasmine-core": "^2.3.4",
     "json-loader": "^0.5.4",
+    "json-server": "^0.12.1",
     "karma": "^1.1.0",
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
