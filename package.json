@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A demo of how to integrate MobX with Angular 1.x",
   "scripts": {
+    "mock-api": "json-server --watch ./api/db.json --routes ./api/routes.json --port 3003",
     "build": "rimraf dist && webpack --bail --progress --profile",
     "server": "webpack-dev-server --history-api-fallback --inline --progress --port 3333",
     "test": "karma start",
